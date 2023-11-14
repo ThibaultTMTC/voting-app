@@ -1,0 +1,37 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Linter Python
+        run: |
+          # Ajoutez ici les commandes pour le linter Python
+      - name: Security check
+        run: |
+          # Ajoutez ici les commandes pour la vérification de sécurité
+
+  build_packer:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Build Packer
+        run: |
+          packer build deploy_packer.json
+          # Assurez-vous que le fichier deploy_packer.json est dans le même répertoire que ce fichier CI
+
+      - name: Push to Docker Hub
+        run: |
+          # Ajoutez ici les commandes pour envoyer l'image Docker sur Docker Hub
+          docker push your-docker-hub/your-image:latest
