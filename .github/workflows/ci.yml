@@ -34,4 +34,4 @@ jobs:
       - name: Push to Docker Hub
         run: |
           # Ajoutez ici les commandes pour envoyer l'image Docker sur Docker Hub
-          docker push your-docker-hub/your-image:latest
+          docker push /voting-app-azure-main:latest
