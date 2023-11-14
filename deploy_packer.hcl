@@ -9,7 +9,7 @@ build {
     playbook_file = "playbook.yml"
   }
   post-processor "docker-tag" {
-    repository = "ThibaultTMTC/azure-vote-main-code"
+    repository = "ThibaultTMTC/azure-vote-back"
     tag        = "latest"
   }
 }
