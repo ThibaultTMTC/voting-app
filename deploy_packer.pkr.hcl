@@ -3,7 +3,7 @@ source "docker" "ubuntu" {
   export_path = "output-docker/"
 }
 packer {
-  requires_plugins {
+  required_plugins {
     docker = {
       source = "github.com.hashicorp.docker"
       version = "~> 1"
