@@ -48,5 +48,6 @@ jobs:
 
       - name: Push to Docker Hub
         run: |
+          docker compose up
           docker tag your-local-image:latest ${{ secrets.DOCKERHUB_USERNAME }}/voting-app:latest
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/voting-app:latest
