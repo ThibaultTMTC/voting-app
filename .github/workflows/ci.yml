@@ -26,6 +26,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name : Init Packer
+        run: packer init .
+        
       - name: Build Packer
         run: |
           packer build deploy_packer.json
