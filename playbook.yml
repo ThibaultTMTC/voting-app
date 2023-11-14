@@ -1,0 +1,21 @@
+---
+- name: Installer la voting-app
+  hosts: all
+  become: true
+  tasks:
+    - name: Mise à jour du cache des paquets et installation de python-minimal
+      apt:
+        name: python-minimal
+        state: present
+        update_cache: yes
+
+    - name: Copie du code de la voting-app
+      git:
+        repo: https://github.com/ThibaultTMTC/voting-app.git
+        version: master
+
+    - name: Installation des dépendances de la voting-app
+      shell: |
+        pip install -r requirements.txt
+      environment:
+        PATH: "{{ ansible_env.PATH }}:~/.local/bin"
