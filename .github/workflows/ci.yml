@@ -11,6 +11,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          ref: ${{github.sha }}
+          token: ${{ secrets.SECRET_TOKEN }}
+          submodules: recursives
+          persist-credentials: false
 
       - name: Linter Python
         run: |
