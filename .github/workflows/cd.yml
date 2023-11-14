@@ -1,0 +1,24 @@
+name: CD Pipeline
+
+on:
+  workflow_run:
+    workflows: ["CI Pipeline"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Launch Docker Compose
+        run: |
+          docker-compose up -d
+
+      - name: Run Unit Test
+        run: |
+          # Ajoutez ici les commandes pour les tests unitaires
+
+      # Ajoutez ici les étapes pour les tests de charge (load test) et de stress (stress test) en bonus
