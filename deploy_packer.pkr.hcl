@@ -11,6 +11,9 @@ packer {
     ansible = {
       source ="githubcom/hashicorp/ansible"
       version ) "~> 1"
+    }
+  }
+}
 
 build {
   sources = ["source.docker.ubuntu"]
