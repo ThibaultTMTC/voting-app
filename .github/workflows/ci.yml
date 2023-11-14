@@ -12,12 +12,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 bandit
+
       - name: Linter Python
         run: |
-          # Ajoutez ici les commandes pour le linter Python
+          flake8
+
       - name: Security check
         run: |
-          # Ajoutez ici les commandes pour la vérification de sécurité
+          bandit -r .
 
   build_packer:
     needs: lint
@@ -26,15 +37,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name : Init Packer
-        run: packer init .
-        
       - name: Build Packer
         run: |
           packer build deploy_packer.pkr.hcl
-          # Assurez-vous que le fichier deploy_packer.json est dans le même répertoire que ce fichier CI
 
       - name: Push to Docker Hub
         run: |
-          # Ajoutez ici les commandes pour envoyer l'image Docker sur Docker Hub
-          docker push /voting-app-azure-main:latest
+         name: Login to Docker Hub
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
+      - name: Push to Docker Hub
+        run: |
+          docker tag your-local-image:latest ${{ secrets.DOCKERHUB_USERNAME }}/voting-app:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/voting-app:latest
