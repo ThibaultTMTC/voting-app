@@ -31,7 +31,7 @@ jobs:
         
       - name: Build Packer
         run: |
-          packer build deploy_packer.json
+          packer build deploy_packer.hcl
           # Assurez-vous que le fichier deploy_packer.json est dans le même répertoire que ce fichier CI
 
       - name: Push to Docker Hub
