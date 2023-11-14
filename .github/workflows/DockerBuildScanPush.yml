@@ -58,4 +58,4 @@ name: Log in to Docker Hub
 
       
 name: Push Docker Image
-      run: docker push your_image_name
+      run: docker push voting-app-azure-vote-front
